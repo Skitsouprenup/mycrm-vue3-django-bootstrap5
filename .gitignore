@@ -1,0 +1,19 @@
+#client
+
+# Logs
+client/pnpm-debug.log*
+
+client/node_modules
+client/dist
+client/pnpm-lock.yaml
+client/.env
+
+# Editor directories and files
+client/.vscode/*
+client/!.vscode/extensions.json
+
+#server
+server-new/test
+server-new/mycrm/.env
+server-new/mycrm/db.sqlite3
+server-new/mycrm/**/__pycache__

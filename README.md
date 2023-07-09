@@ -1,4 +1,4 @@
-# lets-chat-app-mern
+# mycrm-vue3-django-bootstrap5
 A simple and responsive CRM app created using Vue3 as front-end framework and 
 Django as back-end framework.
 

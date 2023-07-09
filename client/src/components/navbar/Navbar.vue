@@ -66,22 +66,17 @@
 <script setup lang="ts">
     import { RouterLink, useRouter } from 'vue-router'
     import useAccountStore from '../../store/useAccountStore'
-    import axios from 'axios';
 
     const router = useRouter()
     const accountStore = useAccountStore()
     
     const logout = () => {
-        axios.post('/api/v1/token/logout/').
-            then(() => {
-                localStorage.removeItem('accessToken')
-                localStorage.removeItem('refreshToken')
-                localStorage.removeItem('userInfo')
-                localStorage.removeItem('teamInfo')
-                localStorage.removeItem('teamPlanInfo')
-                router.push('/login')
-            }).
-            catch((e) => console.error(e))
+        localStorage.removeItem('accessToken')
+        localStorage.removeItem('refreshToken')
+        localStorage.removeItem('userInfo')
+        localStorage.removeItem('teamInfo')
+        localStorage.removeItem('teamPlanInfo')
+        router.push('/login')
     }
 
     const showIfAuth = (auth: boolean) => {

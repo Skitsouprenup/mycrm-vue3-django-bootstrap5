@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router';
-import { checkSubscription } from '../../../../scripts/team/planoperations';
+import { checkSubscription } from '../../../../scripts/team/planoperations'
 import useAccountStore from '../../../../store/useAccountStore'
 import { storeToRefs } from 'pinia'
 

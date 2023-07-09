@@ -42,7 +42,7 @@
             </tbody>
         </table>
 
-        <div>
+        <div class="d-flex gap-2">
             <button
                 class="btn btn-primary"
                 @click="prevPage"
@@ -72,7 +72,7 @@
     const { isLoading } = storeToRefs(accountStore)
     const router = useRouter()
     let clients : Ref<unknownObjectType[]> = ref([])
-    const currentPage = ref(1)
+    const currentPage = ref(0)
     const clientsCount = ref(0)
     const paginationBtns = reactive({
         showNext: false,

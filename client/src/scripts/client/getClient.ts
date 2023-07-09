@@ -87,7 +87,12 @@ export const getClients = (
     pageAction: 'next' | 'prev' | 'init'
 ) => {
     isLoading.value = true
-    let url = updatePaginationUrl(pageAction, currentPage, 'clients')
+
+    let pageNumber = currentPage.value + 1
+    if(pageAction === 'prev')
+        pageNumber = currentPage.value - 1
+
+    let url = updatePaginationUrl(pageAction, pageNumber, 'clients')
 
     const connect = async () => {
         axios.get(url)
@@ -100,7 +105,8 @@ export const getClients = (
                     response.data.next ? true : false,
                     response.data.previous ? true : false,
                     currentPage, 
-                    paginationBtns
+                    paginationBtns,
+                    pageAction
                 )
             }
         })

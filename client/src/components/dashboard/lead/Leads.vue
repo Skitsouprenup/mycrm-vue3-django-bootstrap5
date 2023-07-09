@@ -49,7 +49,7 @@
             </tbody>
         </table>
 
-        <div>
+        <div class="d-flex gap-2">
             <button
                 class="btn btn-primary"
                 @click="prevPage"
@@ -79,7 +79,7 @@
     const accountStore = useAccountStore()
     const { isLoading } = storeToRefs(accountStore)
     const router = useRouter()
-    const currentPage = ref(1)
+    const currentPage = ref(0)
     const leadsCount = ref(0)
     const paginationBtns = reactive({
         showNext: false,

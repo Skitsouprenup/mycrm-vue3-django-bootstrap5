@@ -101,7 +101,10 @@
             route.params.id as string, 
             message, 
             lead as Ref<leadFormData | null>,
-            companyName))
+            companyName,
+            'edit'
+        )
+    )
 
     const submitForm = () => {
         errors.value = []

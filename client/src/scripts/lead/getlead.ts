@@ -5,15 +5,17 @@ import { getObjectProperty,
 import { updatePagination, updatePaginationUrl } from "../Pagination"
 import { refreshTokenWithStatus } from "../utilities/refreshToken"
 
-const flattenLeadData = (lead : unknownObjectType) => {
+const flattenLeadData = (lead: unknownObjectType, viewType: string = 'view') => {
     const flattenedLead : unknownObjectType = {}
 
     for (const [key, value] of Object.entries(lead)) {
 
         if(key === 'assigned_to') {
-            flattenedLead[key] = 
-                getObjectProperty(lead.assigned_to, 'first_name') + ' ' +
-                getObjectProperty(lead.assigned_to, 'last_name')
+            if(viewType === 'view')
+                flattenedLead[key] = 
+                    getObjectProperty(lead.assigned_to, 'first_name') + ' ' +
+                    getObjectProperty(lead.assigned_to, 'last_name')
+            else flattenedLead[key] = getObjectProperty(lead.assigned_to, 'username')
             continue
         }
         flattenedLead[key] = value
@@ -48,14 +50,15 @@ export const getLeadById = (
     id: string,
     message: Ref<string>,
     lead: Ref<unknownObjectType | null>,
-    companyName: Ref<string> | null = null) => {
+    companyName: Ref<string> | null = null,
+    assignedToView: string) => {
 
     const connect = async () => {
         axios.get(`/api/v1/leads/${id}/`)
         .then((response) => {
             message.value = ''
             if(companyName) companyName.value = response.data.company 
-            lead.value = flattenLeadData(response.data)
+            lead.value = flattenLeadData(response.data, assignedToView)
             
         })
         .catch((e) => {
@@ -76,9 +79,13 @@ export const getLeads = (
     currentPage: Ref<number>,
     pageAction: 'next' | 'prev' | 'init'
 ) => {
-
     isLoading.value = true
-    let url = updatePaginationUrl(pageAction, currentPage, 'leads')
+
+    let pageNumber = currentPage.value + 1
+    if(pageAction === 'prev')
+        pageNumber = currentPage.value - 1
+
+    let url = updatePaginationUrl(pageAction, pageNumber, 'leads')
 
     const connect = async() => {
         axios.get(url)
@@ -89,7 +96,8 @@ export const getLeads = (
                 response.data.next ? true : false,
                 response.data.previous ? true : false,
                 currentPage, 
-                paginationBtns
+                paginationBtns,
+                pageAction
             )
         })
         .catch(async (e) => {

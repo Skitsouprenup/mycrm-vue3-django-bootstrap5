@@ -2,7 +2,7 @@
 A simple and responsive CRM app created using Vue3 as front-end framework and 
 Django as back-end framework.
 
-I have a demo video of this project in this [link](https://youtu.be/YRDMfVawP1U)
+I have a demo video of this project in this [link](https://youtu.be/8y9ME27r57g)
 
 # Technologies Used
 * **Bootstrap5**
